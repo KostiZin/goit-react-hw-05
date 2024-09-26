@@ -4,6 +4,7 @@ import MoviesPage from "../../pages/MoviesPage/MoviesPage";
 import HomePage from "../../pages/HomePage/HomePage";
 import clsx from "clsx";
 import css from "./Navigation.module.css";
+import MovieList from "../MovieList/MovieList";
 
 const buildLinkClass = ({ isActive }) => {
   return clsx(css.link, isActive && css.activeLink);
@@ -13,10 +14,10 @@ const Navigation = () => {
   return (
     <div className={css.wrapper}>
       <NavLink to="/" className={buildLinkClass}>
-        <HomePage />
+        Home
       </NavLink>
       <NavLink to="/movies" className={buildLinkClass}>
-        <MoviesPage />
+        Movies
       </NavLink>
     </div>
   );
