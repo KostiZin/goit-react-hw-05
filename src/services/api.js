@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://api.themoviedb.org/";
+axios.defaults.baseURL = "https://api.themoviedb.org/3/";
 
 const options = {
   headers: {
@@ -9,7 +9,7 @@ const options = {
   },
 };
 
-const urlTrendingMovies = `3/trending/movie/week?language=en-US`;
+const urlTrendingMovies = `trending/movie/week?language=en-US`;
 
 // const urlMovieDetails = `3/movie/${movieId}?language=en-US`;
 
@@ -30,11 +30,31 @@ export const fetchMovies = async () => {
 
 export const fetchMovieDetails = async (movieId) => {
   const details = await axios
-    .get(`3/movie/${movieId}?language=en-US`, options)
+    .get(`movie/${movieId}?language=en-US`, options)
     .then((resp) => resp.data)
     .catch((err) => console.error(err));
-  console.log(details);
+  // console.log(details);
   return details;
 };
 
 // fetchMovieDetails(698687);
+
+export const fetchMovieCredits = async (movieId) => {
+  const credits = await axios
+    .get(`movie/${movieId}/credits`, options)
+    .then((resp) => resp.data.cast)
+    .catch((err) => console.log(err));
+
+  return credits;
+};
+
+export const fetchMovieReview = async (movieId) => {
+  const reviews = await axios
+    .get(`movie/${movieId}/reviews`, options)
+    .then((resp) => resp.data.results)
+    .catch((err) => console.log(err));
+
+  return reviews;
+};
+
+// fetchMovieReview(748167);

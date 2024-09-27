@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, NavLink, Outlet, useParams } from "react-router-dom";
 import { fetchMovieDetails } from "../../services/api";
+import MovieCast from "../../components/MovieCast/MovieCast";
 
 const MovieDetailsPage = () => {
   // Helps us to get the ID of a specific item (movie)
@@ -13,20 +14,20 @@ const MovieDetailsPage = () => {
       const data = await fetchMovieDetails(movieId);
 
       setMovie(data);
-      console.log(data);
+      // console.log(data);
     };
     getData();
   }, [movieId]);
 
-  console.log(movie);
+  // console.log(movie);
 
   if (!movie) return <h2>Loading...</h2>;
 
-  const { original_title, overview, vote_average, genres } = movie;
+  const { original_title, overview, vote_average, genres, poster_path } = movie;
 
   return (
     <div>
-      {/* <img src="" alt="" /> */}
+      <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt="movie" />
       <h2>{original_title}</h2>
       <p>{vote_average}</p>
       <p>{overview}</p>
@@ -39,9 +40,14 @@ const MovieDetailsPage = () => {
         </ul>
       </div>
       <div>
+        <hr />
         <p>Additional info</p>
-        <p>Cast</p>
-        <p>Reviews</p>
+        <div>
+          <NavLink to="cast">Cast</NavLink>
+          <NavLink to="reviews">Reviews</NavLink>
+        </div>
+        <hr />
+        <Outlet />
       </div>
     </div>
   );
