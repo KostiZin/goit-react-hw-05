@@ -1,0 +1,8 @@
+.img {
+  max-width: 300px;
+}
+
+.movieWrapper {
+  display: flex;
+  margin: 14px;
+}

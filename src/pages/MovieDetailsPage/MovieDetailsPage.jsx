@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, Outlet, useParams } from "react-router-dom";
 import { fetchMovieDetails } from "../../services/api";
 import MovieCast from "../../components/MovieCast/MovieCast";
+import s from "./MovieDetailsPage.module.css";
 
 const MovieDetailsPage = () => {
   // Helps us to get the ID of a specific item (movie)
@@ -27,17 +28,23 @@ const MovieDetailsPage = () => {
 
   return (
     <div>
-      <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt="movie" />
-      <h2>{original_title}</h2>
-      <p>{vote_average}</p>
-      <p>{overview}</p>
-      <div>
-        Genres:{" "}
-        <ul>
-          {genres.map((genre) => (
-            <li key={genre.id}>{genre.name}</li>
-          ))}
-        </ul>
+      <div className={s.movieWrapper}>
+        <img
+          className={s.img}
+          src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+          alt="movie"
+        />
+        <h2>{original_title}</h2>
+        <p>{vote_average}</p>
+        <p>{overview}</p>
+        <div>
+          Genres:{" "}
+          <ul>
+            {genres.map((genre) => (
+              <li key={genre.id}>{genre.name}</li>
+            ))}
+          </ul>
+        </div>
       </div>
       <div>
         <hr />
