@@ -24,7 +24,14 @@ const MovieDetailsPage = () => {
 
   if (!movie) return <h2>Loading...</h2>;
 
-  const { original_title, overview, vote_average, genres, poster_path } = movie;
+  const {
+    original_title,
+    overview,
+    vote_average,
+    genres,
+    poster_path,
+    release_date,
+  } = movie;
 
   return (
     <div>
@@ -34,16 +41,19 @@ const MovieDetailsPage = () => {
           src={`https://image.tmdb.org/t/p/w500${poster_path}`}
           alt="movie"
         />
-        <h2>{original_title}</h2>
-        <p>{vote_average}</p>
-        <p>{overview}</p>
-        <div>
-          Genres:{" "}
-          <ul>
-            {genres.map((genre) => (
-              <li key={genre.id}>{genre.name}</li>
-            ))}
-          </ul>
+        <div className={s.infoWrapper}>
+          <h2>{original_title}</h2>
+          <p>Realese date: {release_date}</p>
+          {/* <p>{vote_average}</p> */}
+          <p>{overview}</p>
+          <div>
+            Genres:{" "}
+            <ul>
+              {genres.map((genre) => (
+                <li key={genre.id}>{genre.name}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
       <div>
