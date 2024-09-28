@@ -1,5 +1,11 @@
-import { useEffect, useState } from "react";
-import { Link, NavLink, Outlet, useParams } from "react-router-dom";
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import { fetchMovieDetails } from "../../services/api";
 import MovieCast from "../../components/MovieCast/MovieCast";
 import s from "./MovieDetailsPage.module.css";
@@ -22,12 +28,15 @@ const MovieDetailsPage = () => {
 
   // console.log(movie);
 
+  //   const location = useLocation();
+  // const backLink = useRef(location.state ?? '/movies');
+
   if (!movie) return <h2>Loading...</h2>;
 
   const {
     original_title,
     overview,
-    vote_average,
+
     genres,
     poster_path,
     release_date,
@@ -35,6 +44,7 @@ const MovieDetailsPage = () => {
 
   return (
     <div>
+      <button>Go back</button>
       <div className={s.movieWrapper}>
         <img
           className={s.img}
