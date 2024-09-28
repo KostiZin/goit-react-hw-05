@@ -14,7 +14,7 @@ const MovieReviews = () => {
       const data = await fetchMovieReview(movieId);
 
       setReview(data);
-      console.log(data);
+      // console.log(data);
     };
     getData();
   }, [movieId]);

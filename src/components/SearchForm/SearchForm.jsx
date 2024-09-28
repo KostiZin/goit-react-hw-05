@@ -7,7 +7,7 @@ const SearchForm = ({ handleChangeQuery }) => {
   };
 
   const handleSubmit = (values) => {
-    console.log(values);
+    // console.log(values);
     handleChangeQuery(values.query);
   };
 

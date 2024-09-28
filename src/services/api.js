@@ -59,13 +59,12 @@ export const fetchMovieReview = async (movieId) => {
 
 // fetchMovieReview(748167);
 
-export const fetchSearchMovie = async (query = "dog") => {
+export const fetchSearchMovie = async (query) => {
   const filteredMovies = await axios
     .get(`search/movie?query=${query}&include_adult=false&page=1`, options)
     .then((resp) => resp.data.results)
     .catch((err) => console.log(err));
 
-  console.log(filteredMovies);
   return filteredMovies;
 };
 

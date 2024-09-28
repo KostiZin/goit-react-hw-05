@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import {
   Link,
   NavLink,
@@ -7,7 +7,6 @@ import {
   useParams,
 } from "react-router-dom";
 import { fetchMovieDetails } from "../../services/api";
-import MovieCast from "../../components/MovieCast/MovieCast";
 import s from "./MovieDetailsPage.module.css";
 
 const MovieDetailsPage = () => {
@@ -16,20 +15,21 @@ const MovieDetailsPage = () => {
 
   const [movie, setMovie] = useState(null);
 
+  //LOCATION
+  const location = useLocation();
+  const goBackRef = useRef(location.state ?? "/movies");
+
+  const defaultImg =
+    "https://dummyimage.com/400x600/cdcdcd/000.jpg&text=No+poster";
+
   useEffect(() => {
     const getData = async () => {
       const data = await fetchMovieDetails(movieId);
 
       setMovie(data);
-      // console.log(data);
     };
     getData();
   }, [movieId]);
-
-  // console.log(movie);
-
-  //   const location = useLocation();
-  // const backLink = useRef(location.state ?? '/movies');
 
   if (!movie) return <h2>Loading...</h2>;
 
@@ -44,17 +44,21 @@ const MovieDetailsPage = () => {
 
   return (
     <div>
-      <button>Go back</button>
+      <Link to={goBackRef.current}>Go back</Link>
+
       <div className={s.movieWrapper}>
         <img
           className={s.img}
-          src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-          alt="movie"
+          src={
+            poster_path
+              ? `https://image.tmdb.org/t/p/w500${poster_path}`
+              : defaultImg
+          }
+          alt={poster_path ? original_title : "poster"}
         />
         <div className={s.infoWrapper}>
           <h2>{original_title}</h2>
           <p>Realese date: {release_date}</p>
-          {/* <p>{vote_average}</p> */}
           <p>{overview}</p>
           <div>
             Genres:{" "}
@@ -74,7 +78,9 @@ const MovieDetailsPage = () => {
           <NavLink to="reviews">Reviews</NavLink>
         </div>
         <hr />
-        <Outlet />
+        <Suspense fallback={<h2>Loading...</h2>}>
+          <Outlet />
+        </Suspense>
       </div>
     </div>
   );

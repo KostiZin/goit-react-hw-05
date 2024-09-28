@@ -18,7 +18,7 @@ const MovieCast = () => {
       const data = await fetchMovieCredits(movieId);
 
       setCast(data);
-      console.log(data);
+      // console.log(data);
     };
     getData();
   }, [movieId]);

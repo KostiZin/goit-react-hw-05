@@ -1,6 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
 import MovieList from "../../components/MovieList/MovieList";
-import { useParams, useSearchParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import { fetchSearchMovie } from "../../services/api";
 
@@ -9,8 +14,6 @@ const MoviesPage = () => {
   const query = searchParams.get("query") ?? "";
   const [movies, setMovies] = useState([]);
 
-  console.log(query);
-
   useEffect(() => {
     if (!query) return;
 
@@ -18,18 +21,15 @@ const MoviesPage = () => {
       const data = await fetchSearchMovie(query);
 
       setMovies(data);
-      console.log(data);
     };
     getData();
   }, [query]);
-
-  console.log(movies);
 
   const handleChangeQuery = (newQuery) => {
     if (!newQuery) {
       return setSearchParams({});
     }
-    console.log(newQuery);
+
     searchParams.set("query", newQuery);
     setSearchParams(searchParams);
   };
@@ -41,6 +41,7 @@ const MoviesPage = () => {
       <h2>Search</h2>
 
       <SearchForm handleChangeQuery={handleChangeQuery} />
+
       {query !== "" && <MovieList movies={movies} />}
     </div>
   );

@@ -8,10 +8,13 @@ const MovieList = ({ movies }) => {
 
   const location = useLocation();
 
+  //LOCATION
+
+  // console.log(location);
+  // console.log(location.pathname);
+
   const defaultImg =
     "https://dummyimage.com/400x600/cdcdcd/000.jpg&text=No+poster";
-
-  console.log(location.pathname);
 
   useEffect(() => {
     const getAllMovies = async () => {
@@ -22,13 +25,13 @@ const MovieList = ({ movies }) => {
     getAllMovies();
   }, []);
 
-  console.log(movies);
-  console.log(trendMovies);
+  // console.log(movies);
+  // console.log(trendMovies);
 
   const displayedMovies = movies ? movies : trendMovies;
 
   if (!displayedMovies || displayedMovies.length === 0)
-    return <p>No movies found.</p>;
+    return <p>No movies found</p>;
 
   return (
     <div className={s.wrapper}>
@@ -42,6 +45,7 @@ const MovieList = ({ movies }) => {
                   ? `${movie.id.toString()}`
                   : `movies/${movie.id.toString()}`
               }
+              state={location}
             >
               <img
                 className={s.img}
