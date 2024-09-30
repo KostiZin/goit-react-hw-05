@@ -11,14 +11,6 @@ const options = {
 
 const urlTrendingMovies = `trending/movie/week?language=en-US`;
 
-// const urlMovieDetails = `3/movie/${movieId}?language=en-US`;
-
-// export const fetchMovies = async () => {
-//   const { data } = await axios.get("results");
-//   console.log(data);
-//   return data.results;
-// };
-
 export const fetchMovies = async () => {
   const results = await axios
     .get(urlTrendingMovies, options)
@@ -33,11 +25,8 @@ export const fetchMovieDetails = async (movieId) => {
     .get(`movie/${movieId}?language=en-US`, options)
     .then((resp) => resp.data)
     .catch((err) => console.error(err));
-  // console.log(details);
   return details;
 };
-
-// fetchMovieDetails(698687);
 
 export const fetchMovieCredits = async (movieId) => {
   const credits = await axios
@@ -57,8 +46,6 @@ export const fetchMovieReview = async (movieId) => {
   return reviews;
 };
 
-// fetchMovieReview(748167);
-
 export const fetchSearchMovie = async (query) => {
   const filteredMovies = await axios
     .get(`search/movie?query=${query}&include_adult=false&page=1`, options)
@@ -67,5 +54,3 @@ export const fetchSearchMovie = async (query) => {
 
   return filteredMovies;
 };
-
-// fetchSearchMovie();

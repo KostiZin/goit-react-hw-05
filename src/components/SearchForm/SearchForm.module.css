@@ -1,0 +1,27 @@
+.form {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+.input {
+  padding: 0 15px;
+  border-radius: 4px;
+  height: 30px;
+  border: 1px solid #6200ee;
+}
+
+.btn {
+  cursor: pointer;
+  padding: 0 15px;
+  border-radius: 4px;
+  background-color: rgb(228, 235, 238);
+  height: 32px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid #6200ee;
+  transition: background 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  &:hover {
+    background: #d2d9f1;
+  }
+}

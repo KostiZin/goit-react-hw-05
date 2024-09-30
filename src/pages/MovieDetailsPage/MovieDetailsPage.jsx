@@ -1,14 +1,9 @@
 import { Suspense, useEffect, useRef, useState } from "react";
-import {
-  Link,
-  NavLink,
-  Outlet,
-  useLocation,
-  useParams,
-} from "react-router-dom";
+import { NavLink, Outlet, useLocation, useParams } from "react-router-dom";
 import { fetchMovieDetails } from "../../services/api";
 import s from "./MovieDetailsPage.module.css";
 import { MdArrowBackIos } from "react-icons/md";
+import { Hourglass } from "react-loader-spinner";
 
 const MovieDetailsPage = () => {
   // Helps us to get the ID of a specific item (movie)
@@ -32,25 +27,16 @@ const MovieDetailsPage = () => {
     getData();
   }, [movieId]);
 
-  if (!movie) return <h2>Loading...</h2>;
+  if (!movie) return;
 
-  const {
-    original_title,
-    overview,
-
-    genres,
-    poster_path,
-    release_date,
-  } = movie;
+  const { original_title, overview, genres, poster_path, release_date } = movie;
 
   return (
     <div>
-      {/* <div className={s.linkBtn}> */}
       <NavLink className={s.linkBtn} to={goBackRef.current}>
         <MdArrowBackIos />
         Go back
       </NavLink>
-      {/* </div> */}
 
       <div className={s.movieWrapper}>
         <img
@@ -70,7 +56,6 @@ const MovieDetailsPage = () => {
             <div className={s.divGenres}>
               Genres:{" "}
               <ul className={s.ul}>
-                {/* Genres */}
                 {genres.map((genre) => (
                   <li key={genre.id}>{genre.name}</li>
                 ))}
@@ -92,7 +77,19 @@ const MovieDetailsPage = () => {
           </NavLink>
         </div>
 
-        <Suspense fallback={<h2>Loading...</h2>}>
+        <Suspense
+          fallback={
+            <Hourglass
+              visible={true}
+              height="80"
+              width="80"
+              ariaLabel="hourglass-loading"
+              wrapperStyle={{ marginTop: "50px" }}
+              wrapperClass=""
+              colors={["#306cce", "#72a1ed"]}
+            />
+          }
+        >
           <Outlet />
         </Suspense>
       </div>

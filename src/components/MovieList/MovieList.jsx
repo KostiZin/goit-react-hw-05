@@ -5,7 +5,7 @@ import s from "./MovieList.module.css";
 import { Hourglass } from "react-loader-spinner";
 
 const MovieList = ({ movies }) => {
-  const [trendMovies, setTrendMovies] = useState([]);
+  const [trendMovies, setTrendMovies] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const location = useLocation();
@@ -14,8 +14,8 @@ const MovieList = ({ movies }) => {
     "https://dummyimage.com/400x600/cdcdcd/000.jpg&text=No+poster";
 
   useEffect(() => {
+    setIsLoading(true);
     const getAllMovies = async () => {
-      setIsLoading(true);
       const data = await fetchMovies();
       setTrendMovies(data);
       setIsLoading(false);
@@ -27,20 +27,20 @@ const MovieList = ({ movies }) => {
 
   if (isLoading)
     return (
-      <p>Loading....</p>
-
-      // <Hourglass
-      //   visible={true}
-      //   height="80"
-      //   width="80"
-      //   ariaLabel="hourglass-loading"
-      //   wrapperStyle={{ marginTop: "50px" }}
-      //   wrapperClass=""
-      //   colors={["#306cce", "#72a1ed"]}
-      // />
+      <Hourglass
+        visible={true}
+        height="80"
+        width="80"
+        ariaLabel="hourglass-loading"
+        wrapperStyle={{ marginTop: "50px" }}
+        wrapperClass=""
+        colors={["#306cce", "#72a1ed"]}
+      />
     );
 
-  if (!displayedMovies || displayedMovies?.length === 0)
+  if (!displayedMovies) return;
+
+  if (displayedMovies?.length === 0)
     return <h3>The movie you are searching is not here :/ </h3>;
 
   return (
