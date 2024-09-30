@@ -1,5 +1,4 @@
 import { Field, Form, Formik } from "formik";
-import React from "react";
 
 const SearchForm = ({ handleChangeQuery }) => {
   const initialValues = {
@@ -7,7 +6,6 @@ const SearchForm = ({ handleChangeQuery }) => {
   };
 
   const handleSubmit = (values) => {
-    // console.log(values);
     handleChangeQuery(values.query);
   };
 

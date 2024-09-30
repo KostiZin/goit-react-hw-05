@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { fetchMovieDetails } from "../../services/api";
 import s from "./MovieDetailsPage.module.css";
+import { MdArrowBackIos } from "react-icons/md";
 
 const MovieDetailsPage = () => {
   // Helps us to get the ID of a specific item (movie)
@@ -44,7 +45,12 @@ const MovieDetailsPage = () => {
 
   return (
     <div>
-      <Link to={goBackRef.current}>Go back</Link>
+      {/* <div className={s.linkBtn}> */}
+      <NavLink className={s.linkBtn} to={goBackRef.current}>
+        <MdArrowBackIos />
+        Go back
+      </NavLink>
+      {/* </div> */}
 
       <div className={s.movieWrapper}>
         <img
@@ -59,25 +65,33 @@ const MovieDetailsPage = () => {
         <div className={s.infoWrapper}>
           <h2>{original_title}</h2>
           <p>Realese date: {release_date}</p>
-          <p>{overview}</p>
-          <div>
-            Genres:{" "}
-            <ul>
-              {genres.map((genre) => (
-                <li key={genre.id}>{genre.name}</li>
-              ))}
-            </ul>
-          </div>
+          <p className={s.pOverview}>{overview}</p>
+          {genres?.length !== 0 && (
+            <div className={s.divGenres}>
+              Genres:{" "}
+              <ul className={s.ul}>
+                {/* Genres */}
+                {genres.map((genre) => (
+                  <li key={genre.id}>{genre.name}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
       <div>
         <hr />
-        <p>Additional info</p>
-        <div>
-          <NavLink to="cast">Cast</NavLink>
-          <NavLink to="reviews">Reviews</NavLink>
-        </div>
+        <p className={s.pInfo}>Additional info</p>
         <hr />
+        <div className={s.linkWrapper}>
+          <NavLink className={s.link} to="cast">
+            Cast
+          </NavLink>
+          <NavLink className={s.link} to="reviews">
+            Reviews
+          </NavLink>
+        </div>
+
         <Suspense fallback={<h2>Loading...</h2>}>
           <Outlet />
         </Suspense>

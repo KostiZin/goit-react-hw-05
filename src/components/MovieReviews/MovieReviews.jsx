@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { fetchMovieReview } from "../../services/api";
+import s from "./MovieReviews.module.css";
 
 const MovieReviews = () => {
   const { movieId } = useParams();
@@ -14,23 +15,24 @@ const MovieReviews = () => {
       const data = await fetchMovieReview(movieId);
 
       setReview(data);
-      // console.log(data);
     };
     getData();
   }, [movieId]);
 
-  if (!reviews) return <p>No reviews yet</p>;
-
   return (
     <div>
-      <ul>
-        {reviews.map((review) => (
-          <li key={review.id}>
-            {review.content}
-            <p>Author: {review.author}</p>
-          </li>
-        ))}
-      </ul>
+      {reviews?.length === 0 ? (
+        <p className={s.pReviews}>There are no reviews yet</p>
+      ) : (
+        <ul className={s.ul}>
+          {reviews.map((review) => (
+            <li className={s.li} key={review.id}>
+              {review.content}
+              <p className={s.pAuthor}>Author: {review.author}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };

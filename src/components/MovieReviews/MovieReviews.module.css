@@ -1,0 +1,26 @@
+.pReviews {
+  margin: 32px;
+  font-style: italic;
+  font-size: large;
+}
+
+.ul {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  list-style: none;
+  text-align: left;
+  gap: 16px;
+}
+
+.li {
+  border: 0.2px solid rgb(222, 216, 216);
+  background-color: rgba(243, 233, 241, 0.164);
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.pAuthor {
+  text-align: right;
+  margin-bottom: 0;
+}

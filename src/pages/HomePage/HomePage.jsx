@@ -1,12 +1,9 @@
-import React from "react";
 import MovieList from "../../components/MovieList/MovieList";
-import { Link, NavLink } from "react-router-dom";
 
 const HomePage = () => {
   return (
     <div>
       <h2>Trending movies this week</h2>
-
       <MovieList />
     </div>
   );

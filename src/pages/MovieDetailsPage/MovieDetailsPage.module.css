@@ -12,5 +12,65 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-  margin: 14px;
+  margin: 16px;
+}
+
+.linkWrapper {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+.pOverview {
+  text-align: left;
+}
+
+.divGenres {
+  display: flex;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.ul {
+  padding: 0;
+  list-style: none;
+  margin: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.pInfo {
+  font-weight: bold;
+}
+
+.linkBtn {
+  display: flex;
+  text-decoration: none;
+  color: black;
+  background-color: rgb(232, 241, 232);
+
+  border-bottom: solid;
+  border-color: rgb(203, 216, 203);
+  border-radius: 8px;
+  padding: 8px 16px 8px 12px;
+  margin: 16px;
+  width: 70px;
+
+  &:hover {
+    background-color: rgb(170, 218, 170);
+  }
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+  padding: 10px 16px 8px;
+  border-bottom: solid;
+  border-color: rgb(176, 176, 230);
+  border-radius: 8px;
+
+  &:hover {
+    background-color: rgb(246, 246, 247);
+  }
 }

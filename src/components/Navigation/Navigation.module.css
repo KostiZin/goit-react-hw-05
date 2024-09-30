@@ -1,17 +1,19 @@
 .wrapper {
   display: flex;
-  background-color: rgb(136, 179, 165);
+  background-color: rgb(131 137 135);
   align-items: center;
   justify-content: flex-start;
-  gap: 10px;
-  margin: auto 10px;
+  gap: 12px;
+  padding: 12px;
 }
 
 .link {
-  color: white;
+  color: rgb(255 240 250);
   font-weight: bold;
+  text-decoration: none;
 }
 
 .activeLink {
-  color: brown;
+  color: rgb(63 12 83);
+  font-size: large;
 }

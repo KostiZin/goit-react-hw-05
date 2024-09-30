@@ -1,11 +1,6 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import MovieList from "../../components/MovieList/MovieList";
-import {
-  Link,
-  useLocation,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import { fetchSearchMovie } from "../../services/api";
 
@@ -34,11 +29,13 @@ const MoviesPage = () => {
     setSearchParams(searchParams);
   };
 
+  console.log(movies);
+
   // if (!movies) return <p>NO</p>;
 
   return (
     <div>
-      <h2>Search</h2>
+      <h2>Search your movie </h2>
 
       <SearchForm handleChangeQuery={handleChangeQuery} />
 

@@ -1,42 +1,52 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { fetchMovies } from "../../services/api";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import s from "./MovieList.module.css";
+import { Hourglass } from "react-loader-spinner";
 
 const MovieList = ({ movies }) => {
   const [trendMovies, setTrendMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const location = useLocation();
-
-  //LOCATION
-
-  // console.log(location);
-  // console.log(location.pathname);
 
   const defaultImg =
     "https://dummyimage.com/400x600/cdcdcd/000.jpg&text=No+poster";
 
   useEffect(() => {
     const getAllMovies = async () => {
+      setIsLoading(true);
       const data = await fetchMovies();
-
       setTrendMovies(data);
+      setIsLoading(false);
     };
     getAllMovies();
   }, []);
 
-  // console.log(movies);
-  // console.log(trendMovies);
-
   const displayedMovies = movies ? movies : trendMovies;
 
-  if (!displayedMovies || displayedMovies.length === 0)
-    return <p>No movies found</p>;
+  if (isLoading)
+    return (
+      <p>Loading....</p>
+
+      // <Hourglass
+      //   visible={true}
+      //   height="80"
+      //   width="80"
+      //   ariaLabel="hourglass-loading"
+      //   wrapperStyle={{ marginTop: "50px" }}
+      //   wrapperClass=""
+      //   colors={["#306cce", "#72a1ed"]}
+      // />
+    );
+
+  if (!displayedMovies || displayedMovies?.length === 0)
+    return <h3>The movie you are searching is not here :/ </h3>;
 
   return (
-    <div className={s.wrapper}>
+    <div>
       <ul className={s.ul}>
-        {displayedMovies.map((movie) => (
+        {displayedMovies?.map((movie) => (
           <li key={movie.id} className={s.li}>
             <NavLink
               className={s.linkWrapper}
@@ -57,9 +67,6 @@ const MovieList = ({ movies }) => {
                 alt={movie.poster_path ? movie.original_title : "poster"}
               />
               <p className={s.title}>{movie.original_title}</p>
-              {/* <p className={s.title}>
-                {new Date(movie.release_date).getFullYear()}
-              </p> */}
             </NavLink>
           </li>
         ))}
